@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: "de.mannodermaus.android-junit5"
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.example.nemanjatrajkovic.enumerator"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        // (Required) Make sure to use the AndroidJUnitRunner, of a subclass of it
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        // (Required) Connect JUnit 5 to the runner
+        testInstrumentationRunnerArgument "runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    // (Required) Writing and executing Unit Tests on the JUnit Platform
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.2.0"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.2.0"
+
+    // (Optional) If you need "Parameterized Tests"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.2.0"
+
+    // (Optional) If you also have JUnit 4-based tests
+    testImplementation "junit:junit:4.12"
+    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:5.2.0"
+
+    // (Required) Writing tests for JUnit Jupiter
+    androidTestImplementation "org.junit.jupiter:junit-jupiter-api:5.2.0"
+    // (Required) The instrumentation test companion library
+    androidTestImplementation "de.mannodermaus.junit5:android-instrumentation-test:0.2.2"
+
+    // (Required) Runtime dependencies to orchestrate the execution on-device
+    androidTestRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.2.0"
+    androidTestRuntimeOnly "org.junit.platform:junit-platform-runner:1.2.0"
+    androidTestRuntimeOnly "de.mannodermaus.junit5:android-instrumentation-test-runner:0.2.2"
+}
